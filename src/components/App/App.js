@@ -8,6 +8,10 @@ import SignUp from '../SignUp/SignUp'
 import SignIn from '../SignIn/SignIn'
 import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
+import CreatePokemon from '../CreatePokemon/CreatePokemon'
+import PokemonIndex from '../ShowPokemon/showPokemon'
+import ShowOnePokemon from '../ShowOnePokemon/ShowOne'
+import PokemonUpdate from '../PokemonUpdate/PokemonUpdate'
 
 class App extends Component {
   constructor () {
@@ -54,6 +58,34 @@ class App extends Component {
           <AuthenticatedRoute user={user} path='/change-password' render={() => (
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
+          <AuthenticatedRoute user={user} exact path='/create-pokemon' render={() => (
+            <CreatePokemon user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/pokemon-index' render={() => (
+            <PokemonIndex user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/pokemon-index/:id' render={(pokemonProps) => {
+            const { match, history } = pokemonProps
+            const pokemonId = match.params.id
+            return (
+              <ShowOnePokemon
+                id={pokemonId}
+                user={user}
+                history={history}
+              />
+            )
+          }}/>
+          <AuthenticatedRoute user={user} exact path='/pokemon-index/update-pokemon/:id' render={(pokemonProps) => {
+            const { match, history } = pokemonProps
+            const pokemonId = match.params.id
+            return (
+              <PokemonUpdate
+                id={pokemonId}
+                user={user}
+                history={history}
+              />
+            )
+          }} />
         </main>
       </Fragment>
     )
