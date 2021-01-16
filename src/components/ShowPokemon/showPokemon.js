@@ -60,6 +60,8 @@ class PokemonIndex extends React.Component {
                   <Link to={`/pokemon-index/${pokemon._id}`}><Card.Header className="showOneStyle">Name: {pokemon.name}</Card.Header></Link>
                   <Card.Header className="showOneStyle">Type: {pokemon.type}</Card.Header>
                   <Card.Header className="showOneStyle">Move: {pokemon.move}</Card.Header>
+                  <Card.Header className="showOneStyle">Good Against: {pokemon.strengths}</Card.Header>
+                  <Card.Header className="showOneStyle">Bad Against: {pokemon.weaknesses}</Card.Header>
                 </Card>
               </CardDeck>
             )

@@ -31,7 +31,9 @@ class ShowOnePokemon extends React.Component {
       isUpdated: false,
       name: '',
       type: '',
-      move: ''
+      move: '',
+      strengths: '',
+      weaknesses: ''
     }
   }
 
@@ -47,7 +49,9 @@ class ShowOnePokemon extends React.Component {
           pokemon: response.data.pokemon,
           name: response.data.pokemon.name,
           type: response.data.pokemon.type,
-          move: response.data.pokemon.move
+          move: response.data.pokemon.move,
+          strengths: response.data.pokemon.strengths,
+          weaknesses: response.data.pokemon.weaknesses
         })
       })
       .catch(console.error)
@@ -86,9 +90,11 @@ class ShowOnePokemon extends React.Component {
               <Card.Title style={headerStyle} className="showOneStyle">Name: {this.state.pokemon.name}</Card.Title>
               <Card.Title style={headerStyle} className="showOneStyle">Type: {this.state.pokemon.type}</Card.Title>
               <Card.Title style={headerStyle} className="showOneStyle">Move: {this.state.pokemon.move}</Card.Title>
+              <Card.Title style={headerStyle} className="showOneStyle">Good Against: {this.state.pokemon.strengths}</Card.Title>
+              <Card.Title style={headerStyle} className="showOneStyle">Bad Against: {this.state.pokemon.weaknesses}</Card.Title>
             </Card>
-            <Button type="button" onClick={this.handleDelete}>Delete</Button>
             <Link to={`/pokemon-index/update-pokemon/${this.props.id}`}><Button>Edit</Button></Link>
+            <Button type="button" className="deleteButton" onClick={this.handleDelete}>Delete</Button>
           </Col>
         </div>
       )

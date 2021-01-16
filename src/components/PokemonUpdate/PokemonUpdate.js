@@ -21,7 +21,9 @@ class PokemonUpdate extends React.Component {
       isUpdated: false,
       name: '',
       type: '',
-      move: ''
+      move: '',
+      strengths: '',
+      weaknesses: ''
     }
   }
 
@@ -36,7 +38,9 @@ class PokemonUpdate extends React.Component {
           isLoaded: true,
           name: response.data.pokemon.name,
           type: response.data.pokemon.type,
-          move: response.data.pokemon.move
+          move: response.data.pokemon.move,
+          strengths: response.data.pokemon.strengths,
+          weaknesses: response.data.pokemon.weaknesses
         })
       })
       .catch(console.error)
@@ -59,6 +63,18 @@ class PokemonUpdate extends React.Component {
       move: userInput
     })
   }
+  onStrengthsChangeHandler = (event) => {
+    const userInput = event.target.value
+    this.setState({
+      strengths: userInput
+    })
+  }
+  onWeaknessesChangeHandler = (event) => {
+    const userInput = event.target.value
+    this.setState({
+      weaknesses: userInput
+    })
+  }
   handleSubmit = (event) => {
     event.preventDefault()
     const { msgAlert, history } = this.props
@@ -70,7 +86,9 @@ class PokemonUpdate extends React.Component {
         pokemon: {
           name: this.state.name,
           type: this.state.type,
-          move: this.state.move
+          move: this.state.move,
+          strengths: this.state.strengths,
+          weaknesses: this.state.weaknesses
         }
       }
     })
@@ -103,6 +121,8 @@ class PokemonUpdate extends React.Component {
                 <Card.Title>Name: <input name="name" type="text" value={this.state.name} onChange={this.onNameChangeHandler}/></Card.Title>
                 <Card.Title>Type: <input name="type" type="text" value={this.state.type} onChange={this.onTypeChangeHandler}/></Card.Title>
                 <Card.Title>Move: <input name="move" type="text" value={this.state.move} onChange={this.onMoveChangeHandler}/></Card.Title>
+                <Card.Title>Good Against: <input name="strengths" type="text" value={this.state.strengths} onChange={this.onStrengthsChangeHandler}/></Card.Title>
+                <Card.Title>Weak Against: <input name="weaknesses" type="text" value={this.state.weaknesses} onChange={this.onWeaknessesChangeHandler}/></Card.Title>
                 <input type="submit" value="Submit" />
               </form>
             </Card>

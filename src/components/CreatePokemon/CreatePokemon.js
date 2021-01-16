@@ -6,6 +6,15 @@ import Button from 'react-bootstrap/Button'
 import messages from '../AutoDismissAlert/messages'
 import { withRouter } from 'react-router-dom'
 
+const headerStyle = {
+  color: '#E70E02',
+  fontSize: '20px'
+}
+
+const h2Style = {
+  color: '#E70E02'
+}
+
 class CreatePokemon extends React.Component {
   constructor (props) {
     super()
@@ -13,7 +22,9 @@ class CreatePokemon extends React.Component {
       pokemon: {
         name: '',
         type: '',
-        move: ''
+        move: '',
+        strengths: '',
+        weaknesses: ''
       },
       createdPokemon: null
     }
@@ -48,7 +59,7 @@ class CreatePokemon extends React.Component {
         variant: 'success'
       }))
       .catch(error => {
-        this.setState({ name: '', type: '', move: '' })
+        this.setState({ name: '', type: '', move: '', strengths: '', weaknesses: '' })
         msgAlert({
           heading: 'Could not create pokemon, Failed with error ' + error.messages,
           message: messages.pokemonCreateFailure,
@@ -57,23 +68,31 @@ class CreatePokemon extends React.Component {
       })
   }
   render () {
-    const { name, type, move } = this.state
+    const { name, type, move, strengths, weaknesses } = this.state
     return (
       <div>
-        <h2>Create a Pokemon!</h2>
+        <h2 style={h2Style} className="headerStyle">Create a Pokemon!</h2>
 
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
-            <Form.Label>Name of the Pokemon:</Form.Label>
+            <Form.Label style={headerStyle} className="pStyle">Name of the Pokemon:</Form.Label>
             <Form.Control required id="name" type="text" name="name" value={name} placeholder="Name of Pokemon" onChange={this.handleChange}/>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Type of the Pokemon:</Form.Label>
+            <Form.Label style={headerStyle} className="pStyle">Type of the Pokemon:</Form.Label>
             <Form.Control required id="type" type="text" name="type" value={type} placeholder="Type of Pokemon" onChange={this.handleChange}/>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Best Move by Pokemon:</Form.Label>
+            <Form.Label style={headerStyle} className="pStyle">Best Move by Pokemon:</Form.Label>
             <Form.Control required id="move" type="text" name="move" value={move} placeholder="Best Move by Pokemon" onChange={this.handleChange}/>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label style={headerStyle} className="pStyle">Pokemon is good against:</Form.Label>
+            <Form.Control required id="strengths" type="text" name="strengths" value={strengths} placeholder="What types are the Pokemon good against" onChange={this.handleChange}/>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label style={headerStyle} className="pStyle">Pokemon is bad against:</Form.Label>
+            <Form.Control required id="weaknesses" type="text" name="weaknesses" value={weaknesses} placeholder="What types are the Pokemon bad against" onChange={this.handleChange}/>
           </Form.Group>
           <Button type="submit">Create the Pokemon</Button>
         </Form>
