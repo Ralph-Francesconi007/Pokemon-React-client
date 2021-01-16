@@ -2,6 +2,7 @@ $primary: red;
 @import '~bootstrap/scss/bootstrap';
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Zilla+Slab:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
 
 .card-style {
   font-family: 'Inter', sans-serif;
@@ -15,4 +16,12 @@ $primary: red;
 .pStyle {
   font-family: 'Inter', sans-serif;
   font-family: 'Zilla Slab', serif;
+}
+
+.showOneStyle {
+  font-family: 'Permanent Marker', cursive;
+}
+
+.pokemonIndex {
+  background-color: #90ee90;
 }

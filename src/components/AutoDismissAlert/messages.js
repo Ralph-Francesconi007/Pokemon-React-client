@@ -6,6 +6,10 @@ export default {
   signOutSuccess: 'Come back soon!',
   changePasswordSuccess: 'Password changed successfully!',
   changePasswordFailure: 'Failed to change passwords. Check your old password and try again.',
-  pokemonCreateSuccess: 'Succesfully made a pokemon for you! Check it out!',
-  pokemonCreateFailure: 'Could not successfully create a pokemon'
+  pokemonCreateSuccess: 'Succesfully made a pokemon! Check it out!',
+  pokemonCreateFailure: 'Could not successfully create a pokemon',
+  deletePokemonSuccess: 'Succesfully deleted pokemon',
+  deletePokemonFailure: 'Could not delete the pokemon',
+  updatePokemonSuccess: 'Successfully updated pokemon',
+  updatePokemonFailue: 'Could not update the pokemon'
 }

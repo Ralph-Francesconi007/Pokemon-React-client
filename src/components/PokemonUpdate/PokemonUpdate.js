@@ -3,6 +3,15 @@ import apiUrl from './../../apiConfig'
 import axios from 'axios'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+import messages from '../AutoDismissAlert/AutoDismissAlert'
+import { withRouter } from 'react-router-dom'
+
+const cardStyle = {
+  backgroundColor: '#8DDBE0',
+  maxWidth: '25%',
+  margin: '7px',
+  padding: '4px'
+}
 
 class PokemonUpdate extends React.Component {
   constructor (props) {
@@ -52,6 +61,7 @@ class PokemonUpdate extends React.Component {
   }
   handleSubmit = (event) => {
     event.preventDefault()
+    const { msgAlert, history } = this.props
     axios({
       url: `${apiUrl}/pokemon/` + this.props.id,
       method: 'PATCH',
@@ -64,6 +74,21 @@ class PokemonUpdate extends React.Component {
         }
       }
     })
+      .then(response => this.setState({ isUpdated: true }))
+      .then(() => history.push('/pokemon-index'))
+      .then(() => msgAlert({
+        heading: 'Successfully updated pokemon',
+        messages: messages.updatePokemonSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ name: '', type: '', move: '' })
+        msgAlert({
+          heading: 'Could not update the pokemon, failed with ' + error.messages,
+          messages: messages.updatePokemonFailue,
+          variant: 'danger'
+        })
+      })
   }
   render () {
     let jsx
@@ -73,7 +98,7 @@ class PokemonUpdate extends React.Component {
       jsx = (
         <div>
           <Col>
-            <Card>
+            <Card border="primary" style={cardStyle}>
               <form onSubmit={this.handleSubmit}>
                 <Card.Title>Name: <input name="name" type="text" value={this.state.name} onChange={this.onNameChangeHandler}/></Card.Title>
                 <Card.Title>Type: <input name="type" type="text" value={this.state.type} onChange={this.onTypeChangeHandler}/></Card.Title>
@@ -94,4 +119,4 @@ class PokemonUpdate extends React.Component {
   }
 }
 
-export default PokemonUpdate
+export default withRouter(PokemonUpdate)

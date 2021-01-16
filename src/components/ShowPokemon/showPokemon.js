@@ -57,9 +57,9 @@ class PokemonIndex extends React.Component {
             return (
               <CardDeck key={pokemon._id} className="card-style">
                 <Card border="primary" style={cardStyle}>
-                  <Link to={`/pokemon-index/${pokemon._id}`}><Card.Header>Name: {pokemon.name}</Card.Header></Link>
-                  <Card.Header>Type: {pokemon.type}</Card.Header>
-                  <Card.Header>Move: {pokemon.move}</Card.Header>
+                  <Link to={`/pokemon-index/${pokemon._id}`}><Card.Header className="showOneStyle">Name: {pokemon.name}</Card.Header></Link>
+                  <Card.Header className="showOneStyle">Type: {pokemon.type}</Card.Header>
+                  <Card.Header className="showOneStyle">Move: {pokemon.move}</Card.Header>
                 </Card>
               </CardDeck>
             )

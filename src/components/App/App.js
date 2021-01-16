@@ -59,7 +59,7 @@ class App extends Component {
             <ChangePassword msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/create-pokemon' render={() => (
-            <CreatePokemon user={user} />
+            <CreatePokemon msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} exact path='/pokemon-index' render={() => (
             <PokemonIndex user={user} />
@@ -72,6 +72,7 @@ class App extends Component {
                 id={pokemonId}
                 user={user}
                 history={history}
+                msgAlert={this.msgAlert}
               />
             )
           }}/>
@@ -83,6 +84,7 @@ class App extends Component {
                 id={pokemonId}
                 user={user}
                 history={history}
+                msgAlert={this.msgAlert}
               />
             )
           }} />

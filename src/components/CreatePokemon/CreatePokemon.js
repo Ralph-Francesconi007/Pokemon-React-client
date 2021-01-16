@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form'
 import axios from 'axios'
 import apiUrl from './../../apiConfig'
 import Button from 'react-bootstrap/Button'
+import messages from '../AutoDismissAlert/messages'
+import { withRouter } from 'react-router-dom'
 
 class CreatePokemon extends React.Component {
   constructor (props) {
@@ -12,7 +14,8 @@ class CreatePokemon extends React.Component {
         name: '',
         type: '',
         move: ''
-      }
+      },
+      createdPokemon: null
     }
     console.log(props)
   }
@@ -23,11 +26,11 @@ class CreatePokemon extends React.Component {
     const pokemonCopy = Object.assign({}, this.state.pokemon)
     pokemonCopy[key] = userInput
     this.setState({ pokemon: pokemonCopy })
-    console.log(pokemonCopy)
   }
 
   handleSubmit = (event) => {
     event.preventDefault()
+    const { msgAlert, history } = this.props
     const pokemonChar = this.state.pokemon
     axios({
       url: `${apiUrl}/pokemon`,
@@ -37,6 +40,21 @@ class CreatePokemon extends React.Component {
         pokemon: pokemonChar
       }
     })
+      .then(response => this.setState({ createdPokemon: response.data.pokemon._id }))
+      .then(() => history.push('/pokemon-index'))
+      .then(() => msgAlert({
+        heading: 'Pokemon Created Successfully',
+        message: messages.pokemonCreateSuccess,
+        variant: 'success'
+      }))
+      .catch(error => {
+        this.setState({ name: '', type: '', move: '' })
+        msgAlert({
+          heading: 'Could not create pokemon, Failed with error ' + error.messages,
+          message: messages.pokemonCreateFailure,
+          variant: 'danger'
+        })
+      })
   }
   render () {
     const { name, type, move } = this.state
@@ -64,4 +82,4 @@ class CreatePokemon extends React.Component {
   }
 }
 
-export default CreatePokemon
+export default withRouter(CreatePokemon)
