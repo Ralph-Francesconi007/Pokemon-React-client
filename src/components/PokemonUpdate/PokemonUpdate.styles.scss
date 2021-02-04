@@ -1,0 +1,27 @@
+.h4-style {
+    color: #E70E02;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.h3-style {
+    color: #E70E02;
+    font-size: 25px;
+    font-family: 'Inter', sans-serif;
+}
+
+.pokemon-border {
+    background-color: #F5F5DC;
+    border-radius: 10px;
+    border: 2px purple solid;
+    box-shadow: 10px 10px 10px silver;
+    margin: 10px;
+    padding: 25px;
+  }
+
+.button-style {
+    background-color: #ffcccb;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin: 4px 2px;
+}

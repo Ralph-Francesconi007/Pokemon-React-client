@@ -1,82 +1,61 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
 import apiUrl from './../../apiConfig'
-// import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
+import './showPokemon.styles.scss'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
-const headerStyle = {
-  color: '#E70E02',
-  fontSize: '20px'
-}
-
-const h2Style = {
-  color: '#E70E02'
-}
-
-const cardStyle = {
-  backgroundColor: '#8DDBE0',
-  maxWidth: '25%',
-  margin: '7px',
-  padding: '4px'
-}
-
-class PokemonIndex extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      pokemon: [],
-      isLoaded: false
-    }
-  }
-  componentDidMount () {
+const PokemonIndex = ({ user }) => {
+  const [pokemon, setPokemon] = useState([])
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+  useEffect(() => {
     axios({
       url: `${apiUrl}/pokemon`,
       method: 'GET',
-      headers: { 'Authorization': `Bearer ${this.props.user.token}` }
+      headers: {
+        Authorization: `Bearer ${user.token}`
+      }
     })
-      .then(response => {
-        this.setState({
-          isLoaded: true,
-          pokemon: response.data.pokemon
-        })
-      })
-      .catch(console.error)
-  }
-  render () {
-    let jsx
-    if (this.state.isLoaded === false) {
-      jsx = <p>Loading ...</p>
-    } else if (this.state.pokemon.length === 0) {
-      jsx = <p>No pokemon to Show! Hit the Create Pokemon tab to add one!</p>
-    } else {
-      jsx = (
-        <div>
-          {this.state.pokemon.map(pokemon => {
-            return (
-              <CardDeck key={pokemon._id} className="card-style">
-                <Card border="primary" style={cardStyle}>
-                  <Link to={`/pokemon-index/${pokemon._id}`}><Card.Header className="showOneStyle">Name: {pokemon.name}</Card.Header></Link>
-                  <Card.Header className="showOneStyle">Type: {pokemon.type}</Card.Header>
-                  <Card.Header className="showOneStyle">Move: {pokemon.move}</Card.Header>
-                  <Card.Header className="showOneStyle">Good Against: {pokemon.strengths}</Card.Header>
-                  <Card.Header className="showOneStyle">Bad Against: {pokemon.weaknesses}</Card.Header>
-                </Card>
-              </CardDeck>
-            )
-          })}
-        </div>
-      )
-    }
+      .then(res => setPokemon(res.data.pokemon))
+  }, [])
+
+  const pokemonjsx = pokemon.map(pokemon => {
     return (
-      <div>
-        <h2 style={h2Style} className="headerStyle">Welcome to your Pokemon Library</h2>
-        <p style={headerStyle} className="pStyle">Here are your Pokemon!</p>
-        {jsx}
+      <div key={pokemon._id} className="pokemon-border">
+        <img src={pokemon.pokemonImage} className="pokemon-image" alt="pokemonImage" />
+        <Link to={`/pokemon-index/${pokemon._id}`}><h4 className="name-style">Name: {pokemon.name}</h4></Link>
+        <h4 className="type-style">Type: {pokemon.type}</h4>
+        <Button variant="primary" onClick={handleShow}>
+        See Skills!
+        </Button>
+        <div key={pokemon._id}>
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title className="modal-title-style">Pokemon Skills</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <h4 className="modal-style">Best Move: {pokemon.move}</h4>
+              <h4 className="modal-style">Strong Against: {pokemon.strengths}</h4>
+              <h4 className="modal-style">Weak Against: {pokemon.weaknesses}</h4>
+            </Modal.Body>
+            <Modal.Footer>
+            </Modal.Footer>
+          </Modal>
+        </div>
       </div>
     )
-  }
+  })
+  return (
+    <div>
+      <h1 className="header-style">Here is your Pokedex!</h1>
+      <div className="pokemon-grid">
+        {pokemonjsx}
+      </div>
+    </div>
+  )
 }
 
 export default PokemonIndex

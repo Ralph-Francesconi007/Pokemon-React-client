@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: 35% 35% 35%;
+}
+
+.pokemon-border {
+  background-color: #F5F5DC;
+  border-radius: 10px;
+  border: 2px purple solid;
+  box-shadow: 10px 10px 10px silver;
+  margin: 10px;
+  padding: 25px;
+}
+
+.pokemon-image {
+  height: 150px;
+  width: auto;
+  margin: 0px auto;
+}
+
+.header-style {
+    color: #E70E02;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.pStyle {
+    font-family: 'Inter', sans-serif;
+    font-family: 'Zilla Slab', serif;
+  }
+
+.showOneStyle {
+    font-family: 'Permanent Marker', cursive;
+  }
+
+.h4-style {
+  color: #E70E02;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-content {
+  background-color: #B22222;
+}
+
+.modal-title-style {
+  color: #ffff00;
+  font-size: 25px;
+  font-family: 'Inter', sans-serif;
+}
+
+.modal-style {
+  color: #ffff00;
+  font-size: 20px;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.name-style {
+  color: #E70E02;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.type-style {
+  color: #E70E02;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 10px;
+}

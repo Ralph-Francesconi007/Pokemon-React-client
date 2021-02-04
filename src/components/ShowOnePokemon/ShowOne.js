@@ -1,27 +1,10 @@
 import React from 'react'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import messages from '../AutoDismissAlert/AutoDismissAlert'
 import { Link } from 'react-router-dom'
-
-const headerStyle = {
-  color: '#E70E02',
-  fontSize: '20px'
-}
-//
-// const h2Style = {
-//   color: '#E70E02'
-// }
-
-const cardStyle = {
-  backgroundColor: '#8DDBE0',
-  maxWidth: '25%',
-  margin: '7px',
-  padding: '4px'
-}
+import './ShowOne.styles.scss'
 
 class ShowOnePokemon extends React.Component {
   constructor (props) {
@@ -84,18 +67,14 @@ class ShowOnePokemon extends React.Component {
       jsx = <p>Loading ...</p>
     } else {
       jsx = (
-        <div>
-          <Col>
-            <Card border="primary" style={cardStyle}>
-              <Card.Title style={headerStyle} className="showOneStyle">Name: {this.state.pokemon.name}</Card.Title>
-              <Card.Title style={headerStyle} className="showOneStyle">Type: {this.state.pokemon.type}</Card.Title>
-              <Card.Title style={headerStyle} className="showOneStyle">Move: {this.state.pokemon.move}</Card.Title>
-              <Card.Title style={headerStyle} className="showOneStyle">Good Against: {this.state.pokemon.strengths}</Card.Title>
-              <Card.Title style={headerStyle} className="showOneStyle">Bad Against: {this.state.pokemon.weaknesses}</Card.Title>
-            </Card>
-            <Link to={`/pokemon-index/update-pokemon/${this.props.id}`}><Button>Edit</Button></Link>
-            <Button type="button" className="deleteButton" onClick={this.handleDelete}>Delete</Button>
-          </Col>
+        <div className="pokemon-border">
+          <h4 className="h4-style">Name: {this.state.pokemon.name}</h4>
+          <h4 className="h4-style">Type: {this.state.pokemon.type}</h4>
+          <h4 className="h4-style">Move: {this.state.pokemon.move}</h4>
+          <h4 className="h4-style">Good Against: {this.state.pokemon.strengths}</h4>
+          <h4 className="h4-style">Bad Against: {this.state.pokemon.weaknesses}</h4>
+          <Link to={`/pokemon-index/update-pokemon/${this.props.id}`}><Button>Edit</Button></Link>
+          <Button type="button" className="deleteButton" onClick={this.handleDelete}>Delete</Button>
         </div>
       )
     }

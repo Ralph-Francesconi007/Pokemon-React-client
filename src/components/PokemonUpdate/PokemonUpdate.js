@@ -1,17 +1,9 @@
 import React from 'react'
 import apiUrl from './../../apiConfig'
 import axios from 'axios'
-import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 import messages from '../AutoDismissAlert/AutoDismissAlert'
 import { withRouter } from 'react-router-dom'
-
-const cardStyle = {
-  backgroundColor: '#8DDBE0',
-  maxWidth: '25%',
-  margin: '7px',
-  padding: '4px'
-}
+import './PokemonUpdate.styles.scss'
 
 class PokemonUpdate extends React.Component {
   constructor (props) {
@@ -100,7 +92,7 @@ class PokemonUpdate extends React.Component {
         variant: 'success'
       }))
       .catch(error => {
-        this.setState({ name: '', type: '', move: '' })
+        this.setState({ name: '', type: '', move: '', strengths: '', weaknesses: '' })
         msgAlert({
           heading: 'Could not update the pokemon, failed with ' + error.messages,
           messages: messages.updatePokemonFailue,
@@ -114,25 +106,21 @@ class PokemonUpdate extends React.Component {
       jsx = <p>Loading ...</p>
     } else {
       jsx = (
-        <div>
-          <Col>
-            <Card border="primary" style={cardStyle}>
-              <form onSubmit={this.handleSubmit}>
-                <Card.Title>Name: <input name="name" type="text" value={this.state.name} onChange={this.onNameChangeHandler}/></Card.Title>
-                <Card.Title>Type: <input name="type" type="text" value={this.state.type} onChange={this.onTypeChangeHandler}/></Card.Title>
-                <Card.Title>Move: <input name="move" type="text" value={this.state.move} onChange={this.onMoveChangeHandler}/></Card.Title>
-                <Card.Title>Good Against: <input name="strengths" type="text" value={this.state.strengths} onChange={this.onStrengthsChangeHandler}/></Card.Title>
-                <Card.Title>Weak Against: <input name="weaknesses" type="text" value={this.state.weaknesses} onChange={this.onWeaknessesChangeHandler}/></Card.Title>
-                <input type="submit" value="Submit" />
-              </form>
-            </Card>
-          </Col>
+        <div className="pokemon-border">
+          <form onSubmit={this.handleSubmit}>
+            <h4 className="h4-style">Name: <input name="name" type="text" value={this.state.name} onChange={this.onNameChangeHandler}/></h4>
+            <h4 className="h4-style">Type: <input name="type" type="text" value={this.state.type} onChange={this.onTypeChangeHandler}/></h4>
+            <h4 className="h4-style">Move: <input name="move" type="text" value={this.state.move} onChange={this.onMoveChangeHandler}/></h4>
+            <h4 className="h4-style">Good Against: <input name="strengths" type="text" value={this.state.strengths} onChange={this.onStrengthsChangeHandler}/></h4>
+            <h4 className="h4-style">Weak Against: <input name="weaknesses" type="text" value={this.state.weaknesses} onChange={this.onWeaknessesChangeHandler}/></h4>
+            <input className="button-style" type="submit" value="Update" />
+          </form>
         </div>
       )
     }
     return (
       <div>
-        <h3>Update pokemon page</h3>
+        <h3 className="h3-style">Update The Pokemon</h3>
         {jsx}
       </div>
     )

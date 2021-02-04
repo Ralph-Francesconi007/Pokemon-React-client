@@ -20,6 +20,7 @@ class CreatePokemon extends React.Component {
     super()
     this.state = {
       pokemon: {
+        pokemonImage: '',
         name: '',
         type: '',
         move: '',
@@ -68,12 +69,16 @@ class CreatePokemon extends React.Component {
       })
   }
   render () {
-    const { name, type, move, strengths, weaknesses } = this.state
+    const { pokemonImage, name, type, move, strengths, weaknesses } = this.state
     return (
       <div>
         <h2 style={h2Style} className="headerStyle">Create a Pokemon!</h2>
 
         <Form onSubmit={this.handleSubmit}>
+          <Form.Group>
+            <Form.Label style={headerStyle} className="pStyle">Image of the Pokemon:</Form.Label>
+            <Form.Control required id="pokemonImage" type="text" name="pokemonImage" value={pokemonImage} placeholder="Image of the Pokemon" onChange={this.handleChange}/>
+          </Form.Group>
           <Form.Group>
             <Form.Label style={headerStyle} className="pStyle">Name of the Pokemon:</Form.Label>
             <Form.Control required id="name" type="text" name="name" value={name} placeholder="Name of Pokemon" onChange={this.handleChange}/>
