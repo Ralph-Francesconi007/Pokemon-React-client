@@ -60,7 +60,7 @@ class CreatePokemon extends React.Component {
         variant: 'success'
       }))
       .catch(error => {
-        this.setState({ name: '', type: '', move: '', strengths: '', weaknesses: '' })
+        this.setState({ pokemonImage: '', name: '', type: '', move: '', strengths: '', weaknesses: '' })
         msgAlert({
           heading: 'Could not create pokemon, Failed with error ' + error.messages,
           message: messages.pokemonCreateFailure,
